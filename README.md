@@ -14,7 +14,7 @@ Here's an example of a resource method signature:
 
 To implement correctly this context, first, it needs to be created and initialized through an asynchronous servlet, this is done in RestAsyncServlet.
 This servlet, in a JAX-RS implementation, has to be replaced by whatever receives a request for a resource.
-On a servlet container, the JAX-RS servlet that maps requests to resources can lookup the resource in its registry, then if it identifies that has the @Async parameter annotation, it can initialize the resouce call as an async I/O call, and assign the RestAsyncContext as the ReadListener and WriteListener for the resource, then pass that AsyncContextListener to the resource.
+On a servlet container, the JAX-RS servlet that maps requests to resources can lookup the resource in its registry, then if it identifies that has the @Async parameter annotation, it can initialize the resource call as an async I/O call, and assign the RestAsyncContext as the ReadListener and WriteListener for the resource, then pass that RestAsyncContext to the resource.
 
 ## You receive the context in the resource, now what?
 
@@ -34,6 +34,6 @@ Pretty much this just defines interfaces and places an example that can be compi
 
 Also, there are some interfaces that can return a JAX-RS Response object, but once the RestAsyncServlet receives it, it does nothing with it, so a method has to be created to take the JAX-RS Response and translate it in a way that an HttpServletResponse can use it for user output.
 
-I consider the code commented well enough to understand how the servlet, context and resource interact and work, and also there are comments to know some of the missing parts like the Response just mentioned before.
+I consider the code commented well enough to understand how the servlet, context and resource interact and work, and also there are comments to know some of the missing parts like the Response just mentioned before, but in case there are any improvements on them or if you need any more help understanding the proposal, just submit an issue or pull request so I can analyze it to further improve the proposal.
 
-I hope this proposal is of any help to take JAX-RS.Next to the non-blocking work, as having the @Suspended annotation is just half way into having full async REST.
+I hope this proposal is of any help to take JAX-RS.Next to the non-blocking world, as having the @Suspended annotation is just half way into having full async JAX-RS implementation.
