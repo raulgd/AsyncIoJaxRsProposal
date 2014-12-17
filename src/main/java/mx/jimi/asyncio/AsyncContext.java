@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-public @interface Async
+public @interface AsyncContext
 {
 //do whatever to inject the RestAsyncContext to a Resource
 }

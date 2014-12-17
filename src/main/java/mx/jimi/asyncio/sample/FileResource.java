@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import mx.jimi.asyncio.Async;
+import mx.jimi.asyncio.AsyncContext;
 import mx.jimi.asyncio.RestAsyncContext;
 
 /**
@@ -33,7 +33,7 @@ public class FileResource
 {
 
 	/**
-	 * Download a file using Async I/O, uses Java 8 lambdas, but could also create a class that implements the
+	 * Download a file using AsyncContext I/O, uses Java 8 lambdas, but could also create a class that implements the
 	 * AsyncBeforeWrite, AsyncWrite and AsyncError interfaces
 	 *
 	 * @param path the file with the full path to download: i.e. C:\\uploads\some-file.txt
@@ -42,7 +42,7 @@ public class FileResource
 	@GET
 	//here you define some initial headers, but more can be appended through the AsyncBeforeWrite event
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public void download(@QueryParam("path") final String path, @Async final RestAsyncContext ctx)
+	public void download(@QueryParam("path") final String path, @AsyncContext final RestAsyncContext ctx)
 	{
 		ctx.setTimeout(3600000);
 		try
@@ -108,8 +108,8 @@ public class FileResource
 	}
 
 	/**
-	 * Upload a file using Async I/O, uses Java 8 lambdas, but could also create a class that implements the AsyncRead,
-	 * AsyncReadDone and AsyncError interfaces
+	 * Upload a file using AsyncContext I/O, uses Java 8 lambdas, but could also create a class that implements the
+	 * AsyncRead, AsyncReadDone and AsyncError interfaces
 	 *
 	 * @param path the path to upload the file to: i.e. C:\\uploads
 	 * @param name the name of the file to upload: i.e. some-file.txt
@@ -117,7 +117,8 @@ public class FileResource
 	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_OCTET_STREAM)
-	public void upload(@QueryParam("path") final String path, @QueryParam("name") final String name, @Async final RestAsyncContext ctx)
+	public void upload(@QueryParam("path") final String path, @QueryParam("name") final String name,
+										 @AsyncContext final RestAsyncContext ctx)
 	{
 		ctx.setTimeout(3600000);
 
