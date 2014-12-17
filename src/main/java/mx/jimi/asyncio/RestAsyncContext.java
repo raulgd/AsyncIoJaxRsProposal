@@ -102,6 +102,8 @@ public class RestAsyncContext implements ReadListener, WriteListener
 			//Here you can send through the Servlet response, whatever the JAX-RS response the user created
 			//so the response is deferred to this method instead of the original resource
 			//In this case, it could be starting headers before beginning to write the response body
+			//You could append the response so that you have both headers at the beginning of the resource method and also
+			//when handling this event, check the FileResource sample's comments
 			Response response = asyncBeforeWrite.onBeforeWrite();
 
 			firstWrite = false;

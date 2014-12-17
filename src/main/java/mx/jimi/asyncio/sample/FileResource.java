@@ -40,6 +40,7 @@ public class FileResource
 	 * @param ctx the possible JAX-RS async I/O context
 	 */
 	@GET
+	//here you define some initial headers, but more can be appended through the AsyncBeforeWrite event
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public void download(@QueryParam("path") final String path, @Async final RestAsyncContext ctx)
 	{
@@ -56,7 +57,9 @@ public class FileResource
 							{
 								try
 								{
-									return Response.ok().type(MediaType.APPLICATION_OCTET_STREAM)
+									//even though you defined the headers already, you could use this response to append any more
+									//headers needed, so this already has an octet-stream header, and we append the needed file headers
+									return Response.ok()
 									.header("Content-Disposition", "attachment; filename=\"" + FileUtils.getFileName(path) + "\"")
 									.header("Content-Length", String.valueOf(file.length()))
 									.build();
